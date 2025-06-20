@@ -5,9 +5,9 @@ import Arkham.Classes.HasGame
 import Arkham.Classes.Query
 import Arkham.Field.Import
 import {-# SOURCE #-} Arkham.GameEnv (getCard)
+import Arkham.Helpers.Modifiers
 import Arkham.Helpers.Query
 import Arkham.Helpers.Ref
-import Arkham.Helpers.Modifiers
 import Arkham.Id
 import Arkham.Matcher qualified as Matcher
 import Arkham.Prelude
@@ -291,6 +291,7 @@ sourceMatches s = \case
         c <- getCard cid
         pure $ c.kind == InvestigatorType
       _ -> pure False
+    KeyType -> pure False
     ScenarioType -> case s of
       ScenarioSource -> pure True
       CardIdSource cid -> do

@@ -186,3 +186,4 @@ displayCardType = \case
   EncounterAssetType -> "asset"
   EncounterEventType -> "event"
   InvestigatorType -> "investigator"
+  KeyType -> "key"

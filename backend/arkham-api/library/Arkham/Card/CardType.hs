@@ -16,6 +16,7 @@ data CardType
   | LocationType
   | EncounterAssetType
   | EncounterEventType
+  | KeyType
   | ActType
   | AgendaType
   | StoryType
@@ -36,6 +37,7 @@ encounterCardTypes =
   , StoryType
   , ActType
   , AgendaType
+  , KeyType
   ]
 
 playerCardTypes :: [CardType]

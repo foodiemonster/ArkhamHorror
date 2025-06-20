@@ -484,6 +484,7 @@ instance Has InvestigatorMatcher CardDef where
     LocationType -> error "invalid matcher"
     EncounterAssetType -> HasMatchingAsset (assetIs cardDef)
     EncounterEventType -> HasMatchingEvent (eventIs cardDef)
+    KeyType -> error "invalid matcher"
     ActType -> error "invalid matcher"
     AgendaType -> error "invalid matcher"
     StoryType -> error "invalid matcher"
@@ -501,6 +502,7 @@ instance Exists CardDef where
     LocationType -> exists $ locationIs def
     EncounterAssetType -> exists $ assetIs def
     EncounterEventType -> exists $ eventIs def
+    KeyType -> error "Not implemented"
     ActType -> error "Not implemented"
     AgendaType -> error "Not implemented"
     StoryType -> exists $ storyIs def
