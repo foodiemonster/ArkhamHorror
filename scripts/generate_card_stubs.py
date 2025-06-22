@@ -252,14 +252,28 @@ def generate_from_csv(
                 name_str = camel_to_words(data.get("File Name", ""))
                 traits_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Traits", "")) if t])
                 rev_conn_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t])
-                if data.get("Unrevealed Symbol", ""):
-                    unrev_conn_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Unrevealed Connections", "")) if t])
+                unrev_symbol_raw = data.get("Unrevealed Symbol", "")
+                unrev_conn_raw = data.get("Unrevealed Connections", "")
+
+                unrev_symbol_diff = bool(
+                    unrev_symbol_raw
+                    and not unrev_symbol_raw.lower().startswith("same")
+                )
+                unrev_conn_diff = bool(
+                    unrev_conn_raw
+                    and not unrev_conn_raw.lower().startswith("same")
+                )
+
+                if unrev_symbol_diff or unrev_conn_diff:
+                    unrev_conn_str = fmt_list(
+                        [tokenize(t) for t in re.split(r",\s*", unrev_conn_raw) if t]
+                    )
                     def_body = [
                         "locationWithUnrevealed",
                         f'    "{data.get("CardID", "")}"',
                         f'    "{name_str}"',
                         f'    {traits_str}',
-                        f'    {tokenize(data.get("Unrevealed Symbol", ""))}',
+                        f'    {tokenize(unrev_symbol_raw)}',
                         f'    {unrev_conn_str}',
                         f'    "{name_str}"',
                         f'    {traits_str}',
