@@ -139,6 +139,9 @@ def create_stub(card_type: str, name: str, projections: dict) -> str:
 def create_location_stub(data: dict, output_dir: str) -> str:
     file_name = data.get("File Name", "").replace(".hs", "")
     varname = camel_to_var(file_name)
+    clues_raw = data.get("Clues", "0")
+    per_player_flag = str(data.get("Per Player?", "")).strip().lower() in ["true", "yes"]
+    clue_expr = f"(PerPlayer {clues_raw})" if per_player_flag else f"(Static {clues_raw})"
     rev_symbol = tokenize(data.get("Revealed Symbol", ""))
     rev_conn = [tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t]
     unrev_symbol_raw = data.get("Unrevealed Symbol", "")
@@ -156,7 +159,7 @@ def create_location_stub(data: dict, output_dir: str) -> str:
         module=file_name,
         varname=varname,
         shroud=data.get("Shroud", "0"),
-        clues=data.get("Clues", "0"),
+        clues=clue_expr,
         card_id=data.get("CardID", ""),
         card_class=data.get("Class", ""),
         card_type=data.get("Type", ""),
@@ -354,5 +357,34 @@ def main() -> None:
             print(f'Created {file_path}')
 
 
-if __name__ == '__main__':
+
     main()
+
+def run_colab(csv_file_path=None, create_zip=True, output_dir="generated_modules"):
+    try:
+        from google.colab import files  # type: ignore
+    except ImportError:
+        files = None
+
+    if files is not None and csv_file_path is None:
+        print("📂 Upload your CSV file:")
+        uploaded = files.upload()
+        if not uploaded:
+            raise RuntimeError("No CSV file uploaded.")
+        csv_file_path = next(iter(uploaded))
+
+    os.makedirs(output_dir, exist_ok=True)
+    projections = load_projections()
+    snippet, loc_snippet = generate_from_csv(csv_file_path, projections, output_dir)
+
+    if create_zip:
+        zip_path = zip_output(output_dir, [snippet, loc_snippet])
+        print(f"✅ Created ZIP: {zip_path}")
+        if files is not None:
+            files.download(zip_path)
+    else:
+        print(f"✅ Stubs written to: {output_dir}")
+
+# Disable CLI mode when running in Colab
+if __name__ == "__main__":
+    print("⚠️ This script is designed for use in Google Colab via `run_colab()`.")
