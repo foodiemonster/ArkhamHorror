@@ -77,6 +77,12 @@ def fmt_list(items: list[str]) -> str:
     return '[' + ', '.join(items) + ']'
 
 
+def parse_traits(value: str) -> list[str]:
+    """Parse the Traits field from the CSV into tokenized traits."""
+    parts = re.split(r"[.,]\s*", value.strip())
+    return [tokenize(p) for p in parts if p]
+
+
 def tokenize(value: str) -> str:
     parts = re.split(r"[^A-Za-z0-9]+", value)
     return ''.join(p.capitalize() for p in parts if p)
@@ -166,7 +172,7 @@ def create_location_stub(data: dict, output_dir: str) -> str:
         card_id=data.get("CardID", ""),
         card_class=data.get("Class", ""),
         card_type=data.get("Type", ""),
-        traits=[tokenize(t) for t in re.split(r",\s*", data.get("Traits", "")) if t],
+        traits=fmt_list(parse_traits(data.get("Traits", ""))),
         set_name=tokenize(data.get("Set", "")),
         encounter_set=tokenize(data.get("Encounter", "")),
         rev_symbol=rev_symbol,
@@ -250,7 +256,7 @@ def generate_from_csv(
                 by_encounter.setdefault(data.get("Encounter", ""), []).append(varname)
 
                 name_str = camel_to_words(data.get("File Name", ""))
-                traits_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Traits", "")) if t])
+                traits_str = fmt_list(parse_traits(data.get("Traits", "")))
                 rev_conn_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t])
                 unrev_symbol_raw = data.get("Unrevealed Symbol", "")
                 unrev_conn_raw = data.get("Unrevealed Connections", "")
