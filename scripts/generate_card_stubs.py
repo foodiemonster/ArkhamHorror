@@ -28,7 +28,7 @@ newtype {module} = {module} LocationAttrs
   deriving newtype (Show, Eq, ToJSON, FromJSON, Entity)
 
 {varname} :: LocationCard {module}
-{varname} = location {module} Cards.{varname} {shroud} (Static {clues})
+{varname} = location {module} Cards.{varname} {shroud} {clues}
 
 -- Card code: {card_id}
 -- Class: {card_class}
@@ -75,6 +75,12 @@ def camel_to_words(name: str) -> str:
 
 def fmt_list(items: list[str]) -> str:
     return '[' + ', '.join(items) + ']'
+
+
+def parse_traits(value: str) -> list[str]:
+    """Parse the Traits field from the CSV into tokenized traits."""
+    parts = re.split(r"[.,]\s*", value.strip())
+    return [tokenize(p) for p in parts if p]
 
 
 def tokenize(value: str) -> str:
@@ -139,9 +145,12 @@ def create_stub(card_type: str, name: str, projections: dict) -> str:
 def create_location_stub(data: dict, output_dir: str) -> str:
     file_name = data.get("File Name", "").replace(".hs", "")
     varname = camel_to_var(file_name)
-    clues_raw = data.get("Clues", "0")
-    per_player_flag = str(data.get("Per Player?", "")).strip().lower() in ["true", "yes"]
-    clue_expr = f"(PerPlayer {clues_raw})" if per_player_flag else f"(Static {clues_raw})"
+    clues_raw = str(data.get("Clues", "0"))
+    match = re.search(r"\d+", clues_raw)
+    clues_value = match.group(0) if match else "0"
+    per_player_search = re.search(r"per\s*player\s*:\s*(true|yes)", clues_raw, re.I)
+    per_player_flag = bool(per_player_search)
+    clue_expr = f"(PerPlayer {clues_value})" if per_player_flag else f"(Static {clues_value})"
     rev_symbol = tokenize(data.get("Revealed Symbol", ""))
     rev_conn = [tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t]
     unrev_symbol_raw = data.get("Unrevealed Symbol", "")
@@ -163,7 +172,7 @@ def create_location_stub(data: dict, output_dir: str) -> str:
         card_id=data.get("CardID", ""),
         card_class=data.get("Class", ""),
         card_type=data.get("Type", ""),
-        traits=[tokenize(t) for t in re.split(r",\s*", data.get("Traits", "")) if t],
+        traits=fmt_list(parse_traits(data.get("Traits", ""))),
         set_name=tokenize(data.get("Set", "")),
         encounter_set=tokenize(data.get("Encounter", "")),
         rev_symbol=rev_symbol,
@@ -247,16 +256,30 @@ def generate_from_csv(
                 by_encounter.setdefault(data.get("Encounter", ""), []).append(varname)
 
                 name_str = camel_to_words(data.get("File Name", ""))
-                traits_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Traits", "")) if t])
+                traits_str = fmt_list(parse_traits(data.get("Traits", "")))
                 rev_conn_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t])
-                if data.get("Unrevealed Symbol", ""):
-                    unrev_conn_str = fmt_list([tokenize(t) for t in re.split(r",\s*", data.get("Unrevealed Connections", "")) if t])
+                unrev_symbol_raw = data.get("Unrevealed Symbol", "")
+                unrev_conn_raw = data.get("Unrevealed Connections", "")
+
+                unrev_symbol_diff = bool(
+                    unrev_symbol_raw
+                    and not unrev_symbol_raw.lower().startswith("same")
+                )
+                unrev_conn_diff = bool(
+                    unrev_conn_raw
+                    and not unrev_conn_raw.lower().startswith("same")
+                )
+
+                if unrev_symbol_diff or unrev_conn_diff:
+                    unrev_conn_str = fmt_list(
+                        [tokenize(t) for t in re.split(r",\s*", unrev_conn_raw) if t]
+                    )
                     def_body = [
                         "locationWithUnrevealed",
                         f'    "{data.get("CardID", "")}"',
                         f'    "{name_str}"',
                         f'    {traits_str}',
-                        f'    {tokenize(data.get("Unrevealed Symbol", ""))}',
+                        f'    {tokenize(unrev_symbol_raw)}',
                         f'    {unrev_conn_str}',
                         f'    "{name_str}"',
                         f'    {traits_str}',
