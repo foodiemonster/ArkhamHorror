@@ -45,6 +45,7 @@ newtype {module} = {module} LocationAttrs
 
 -- Revealed Abilities:\n{revealed_abilities}
 -- Unrevealed Abilities:\n{unrevealed_abilities}
+-- TODO Card Text:\n{card_text}
 
 instance HasAbilities {module} where
   getAbilities ({module} attrs) = extendRevealed attrs []
@@ -170,6 +171,7 @@ def create_location_stub(data: dict, output_dir: str) -> str:
         unrev_conn=unrev_conn,
         revealed_abilities=data.get("revealed_abilities", ""),
         unrevealed_abilities=data.get("unrevealed_abilities", ""),
+        card_text=data.get("card_text", ""),
     )
     os.makedirs(output_dir, exist_ok=True)
     path = os.path.join(output_dir, f"{file_name}.hs")
@@ -180,6 +182,27 @@ def create_location_stub(data: dict, output_dir: str) -> str:
     except FileNotFoundError:
         pass
     return path
+
+
+def append_comments(path: str, data: dict) -> None:
+    comments = []
+    if data.get("cost"):
+        comments.append(f"-- Cost: {data['cost']}")
+    if data.get("slot"):
+        comments.append(f"-- Slot: {data['slot']}")
+    if data.get("icons"):
+        comments.append(f"-- Icons: {data['icons']}")
+    if data.get("card_text"):
+        comments.append("-- TODO Card Text:")
+        comments.append("-- " + data["card_text"].replace("\n", "\n-- "))
+    if not comments:
+        return
+    with open(path, "a") as handle:
+        handle.write("\n" + "\n".join(comments) + "\n")
+    try:
+        subprocess.run(["fourmolu", "-i", path], check=False)
+    except FileNotFoundError:
+        pass
 
 
 def generate_from_csv(
@@ -205,6 +228,14 @@ def generate_from_csv(
                 data["revealed_abilities"] = row[1].replace("\n", "\n-- ")
             if len(row) > 2:
                 data["unrevealed_abilities"] = row[2].replace("\n", "\n-- ")
+            if len(row) > 3:
+                data["card_text"] = row[3].replace("\n", "\n-- ")
+            if len(row) > 4:
+                data["cost"] = row[4]
+            if len(row) > 5:
+                data["slot"] = row[5]
+            if len(row) > 6:
+                data["icons"] = row[6]
             card_type = data.get("Type", "").lower()
             if card_type == "location":
                 path = create_location_stub(data, output_dir)
@@ -248,6 +279,7 @@ def generate_from_csv(
                 def_entries.append(def_head + "\n    ".join(def_body))
             else:
                 path = create_stub(card_type, data.get("File Name", ""), projections)
+                append_comments(path, data)
 
     with open(snippet_path, "w") as handle:
         handle.write("-- Add these entries to allLocationCards:\n")
