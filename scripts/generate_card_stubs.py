@@ -28,7 +28,7 @@ newtype {module} = {module} LocationAttrs
   deriving newtype (Show, Eq, ToJSON, FromJSON, Entity)
 
 {varname} :: LocationCard {module}
-{varname} = location {module} Cards.{varname} {shroud} (Static {clues})
+{varname} = location {module} Cards.{varname} {shroud} {clues}
 
 -- Card code: {card_id}
 -- Class: {card_class}
@@ -139,9 +139,11 @@ def create_stub(card_type: str, name: str, projections: dict) -> str:
 def create_location_stub(data: dict, output_dir: str) -> str:
     file_name = data.get("File Name", "").replace(".hs", "")
     varname = camel_to_var(file_name)
-    clues_raw = data.get("Clues", "0")
+    clues_raw = str(data.get("Clues", "0"))
+    match = re.search(r"\d+", clues_raw)
+    clues_value = match.group(0) if match else "0"
     per_player_flag = str(data.get("Per Player?", "")).strip().lower() in ["true", "yes"]
-    clue_expr = f"(PerPlayer {clues_raw})" if per_player_flag else f"(Static {clues_raw})"
+    clue_expr = f"(PerPlayer {clues_value})" if per_player_flag else f"(Static {clues_value})"
     rev_symbol = tokenize(data.get("Revealed Symbol", ""))
     rev_conn = [tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t]
     unrev_symbol_raw = data.get("Unrevealed Symbol", "")
