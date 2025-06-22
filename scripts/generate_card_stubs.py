@@ -142,7 +142,8 @@ def create_location_stub(data: dict, output_dir: str) -> str:
     clues_raw = str(data.get("Clues", "0"))
     match = re.search(r"\d+", clues_raw)
     clues_value = match.group(0) if match else "0"
-    per_player_flag = str(data.get("Per Player?", "")).strip().lower() in ["true", "yes"]
+    per_player_search = re.search(r"per\s*player\s*:\s*(true|yes)", clues_raw, re.I)
+    per_player_flag = bool(per_player_search)
     clue_expr = f"(PerPlayer {clues_value})" if per_player_flag else f"(Static {clues_value})"
     rev_symbol = tokenize(data.get("Revealed Symbol", ""))
     rev_conn = [tokenize(t) for t in re.split(r",\s*", data.get("Revealed Connections", "")) if t]
