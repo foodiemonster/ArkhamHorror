@@ -418,9 +418,9 @@ allLocationCards =
       , hallsOfPnakotusWesternCorridors
       , hallway
       , hangmansBrook
-      , hangmansBrook
+      , hangmansBrook_RtTCU
       , hangmansBrookSpectral
-      , hangmansBrookSpectral
+      , hangmansBrookSpectral_RtTCU
       , hangmansHillShroudedInMystery
       , hangmansHillWhereItAllEnds
       , hauntedFields
