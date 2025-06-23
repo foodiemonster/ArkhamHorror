@@ -472,7 +472,7 @@ allLocationCards =
       , innsmouthSquareInTooDeep
       , intersection_a
       , intersection_b
-      , interstellarAbyss.hs
+      , interstellarAbyss
       , interviewRoomArrivalChamber
       , interviewRoomIchorFilledChamber
       , interviewRoomRestrainingChamber
@@ -526,7 +526,7 @@ allLocationCards =
       , marshRefineryInTooDeep
       , masterBedroom
       , masterBedroomSpectral
-      , merchantDistrict.hs
+      , merchantDistrict
       , merchantDistrict_300
       , merchantDistrict_301
       , messHall
@@ -570,7 +570,7 @@ allLocationCards =
       , newChurchGreen
       , newChurchGreenInTooDeep
       , nexusOfNKai
-      , nightmareBreach.hs
+      , nightmareBreach
       , northside
       , northsideTrainStation
       , northTower_287
@@ -667,7 +667,7 @@ allLocationCards =
       , riverCanyon
       , riversideTemple
       , rivertown
-      , rivertown
+      , rivertown_RtTCU
       , rivertown_292
       , rivertown_293
       , rivertownAbandonedWarehouse
@@ -734,7 +734,7 @@ allLocationCards =
       , snakePit
       , snowCoveredCrag
       , snowGraves
-      , southChurch.hs
+      , southChurch
       , southChurch_298
       , southChurch_299
       , southside
@@ -867,7 +867,7 @@ allLocationCards =
       , upstairsDoorwayBedroom
       , upstairsDoorwayLibrary
       , upstairsHallway
-      , uptown.hs
+      , uptown
       , uptown_296
       , uptown_297
       , valeOfPnath
@@ -893,10 +893,10 @@ allLocationCards =
       , whateleyRuins_250
       , whateleyRuins_251
       , whiteBluff
-      , windingGulf.hs
+      , windingGulf
       , windsweptPath
       , wineCellar
-      , wineCellar
+      , wineCellarSpectral
       , witchesCircle
       , witchHauntedWoodsAbandonedMine
       , witchHauntedWoodsCairnStones
