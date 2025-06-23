@@ -1,14 +1,7 @@
-module Arkham.Location.Cards.Lounge (lounge, Lounge (..)) where
+module Arkham.Location.Cards.Lounge (lounge, Lounge(..)) where
 
-import Arkham.Ability
-import Arkham.Asset.Cards qualified as Assets
-import Arkham.GameValue
-import Arkham.Helpers.Query
 import Arkham.Location.Cards qualified as Cards
 import Arkham.Location.Import.Lifted
-import Arkham.Matcher
-import Arkham.Placement
-import Arkham.Scenarios.ForTheGreaterGood.Helpers
 
 newtype Lounge = Lounge LocationAttrs
   deriving anyclass (IsLocation, HasModifiersFor)
@@ -17,20 +10,32 @@ newtype Lounge = Lounge LocationAttrs
 lounge :: LocationCard Lounge
 lounge = location Lounge Cards.lounge 2 (PerPlayer 2)
 
+-- Card code: 54043b
+-- Class: Mythos
+-- Type: Location
+-- Traits: [Lodge]
+-- Set: ReturnToTheCircleUndone
+-- Encounter Set: ReturnToForTheGreaterGood
+-- Revealed Symbol: Moon
+-- Revealed Connections: ['Circle', 'Heart', 'Plus', 'Trefoil']
+-- Victory: 0
+-- Unrevealed Card Id: 54043
+-- Unrevealed Symbol: Moon
+-- Unrevealed Connections: ['Circle', 'Heart', 'Plus']
+
+-- Revealed Abilities:
+-- <b>Forced</b> - After the Lounge is revealed: Put the set-aside Vault and Library locations into play. [action] Investigators at the Lounge spend 1 [per_investigator] clues, as a group: Put the set-aside Hidden Passageway location into play.
+-- Unrevealed Abilities:
+
+-- TODO Card Text:
+
+
 instance HasAbilities Lounge where
-  getAbilities (Lounge a) = extendRevealed1 a $ mkAbility a 1 $ forced $ RevealLocation #after You (be a)
+  getAbilities (Lounge attrs) = extendRevealed attrs []
 
 instance RunMessage Lounge where
   runMessage msg l@(Lounge attrs) = runQueueT $ case msg of
-    UseThisAbility _ (isSource attrs -> True) 1 -> do
-      push $ PlaceLocationMatching (CardWithTitle "Vault")
-      whenM (selectNone $ LocationWithTitle "Library") do
-        push $ PlaceLocationMatching (CardWithTitle "Library")
-
-      card <- getSetAsideCard Assets.augustLindquist
-      augustLindquist <- createAssetAt card (AtLocation attrs.id)
-
-      mKey <- getRandomKey
-      for_ mKey $ placeKey augustLindquist
-      pure l
+    -- Example of using Projection helpers:
+    -- shroudValue <- fieldJust LocationShroud attrs.id
+    -- clueCount <- fieldMap LocationClues length attrs.id
     _ -> Lounge <$> liftRunMessage msg attrs
