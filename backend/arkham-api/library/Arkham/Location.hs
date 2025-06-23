@@ -921,7 +921,7 @@ allLocations =
       SomeLocationCard hangmansBrookSpectral_RtTCU
     , SomeLocationCard hangmansBrook_RtTCU
       --- Return to For the Greater Good
-      SomeLocationCard lounge
+      SomeLocationCard lounge_RtTCU
     , SomeLocationCard relicStorage
     , SomeLocationCard shroudedArchive
       --- Return to In the Clutches of Chaos
