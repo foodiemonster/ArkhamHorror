@@ -1,14 +1,14 @@
-module Arkham.Location.Cards.Lounge (lounge, Lounge(..)) where
+module Arkham.Location.Cards.Lounge_RtTCU (lounge, Lounge(..)) where
 
 import Arkham.Location.Cards qualified as Cards
 import Arkham.Location.Import.Lifted
 
-newtype Lounge = Lounge LocationAttrs
+newtype Lounge_RtTCU = Lounge LocationAttrs
   deriving anyclass (IsLocation, HasModifiersFor)
   deriving newtype (Show, Eq, ToJSON, FromJSON, Entity)
 
-lounge :: LocationCard Lounge
-lounge = location Lounge Cards.lounge 2 (PerPlayer 2)
+Lounge_RtTCU :: LocationCard Lounge_RtTCU
+Lounge_RtTCU = location Lounge_RtTCU Cards.lounge_RtTCU 2 (PerPlayer 2)
 
 -- Card code: 54043b
 -- Class: Mythos
@@ -30,11 +30,11 @@ lounge = location Lounge Cards.lounge 2 (PerPlayer 2)
 -- TODO Card Text:
 
 
-instance HasAbilities Lounge where
+instance HasAbilities Lounge_RtTCU where
   getAbilities (Lounge attrs) = extendRevealed attrs []
 
-instance RunMessage Lounge where
-  runMessage msg l@(Lounge attrs) = runQueueT $ case msg of
+instance RunMessage Lounge_RtTCU where
+  runMessage msg l@(Lounge_RtTCU attrs) = runQueueT $ case msg of
     -- Example of using Projection helpers:
     -- shroudValue <- fieldJust LocationShroud attrs.id
     -- clueCount <- fieldMap LocationClues length attrs.id
