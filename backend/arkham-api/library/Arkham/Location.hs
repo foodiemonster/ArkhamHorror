@@ -902,6 +902,39 @@ allLocations =
     , SomeLocationCard waterfall
     , SomeLocationCard trailOfTheDead
     , SomeLocationCard cloudForest
+    , -- Return to The Circle Undone
+      --- Return to The Witching Hour
+      SomeLocationCard witchhauntedWoodsWitchTree
+    , SomeLocationCard witchhauntedWoodsUnmarkedGraveyard
+    , SomeLocationCard arkhamWoodsHiddenPath
+    , SomeLocationCard arkhamWoodsPlaceOfPower
+    , SomeLocationCard arkhamWoodsBootleggingOperation
+      --- Return to At Death's Doorstep
+      SomeLocationCard wineCellar
+    , SomeLocationCard wineCellarSpectral
+      --- Return to The Secret Name
+      SomeLocationCard templeOfRlyeh
+    , SomeLocationCard thePriceManor
+    , SomeLocationCard the9thWard
+    , SomeLocationCard libraryOfEbla
+      --- Return to The Wages of Sin
+      SomeLocationCard hangmansBrookSpectral_RtTCU
+    , SomeLocationCard hangmansBrook_RtTCU
+      --- Return to For the Greater Good
+      SomeLocationCard lounge
+    , SomeLocationCard relicStorage
+    , SomeLocationCard shroudedArchive
+      --- Return to In the Clutches of Chaos
+      SomeLocationCard frenchHill
+    , SomeLocationCard rivertown_RtTCU
+    , SomeLocationCard southside
+    , SomeLocationCard uptown
+    , SomeLocationCard southChurch
+    , SomeLocationCard merchantDistrict
+      --- Return to Before the Black Throne
+      SomeLocationCard nightmareBreach
+    , SomeLocationCard interstellarAbyss
+    , SomeLocationCard windingGulf
     , -- The Curse of the Rougarou
       SomeLocationCard cursedShores
     , SomeLocationCard gardenDistrict
