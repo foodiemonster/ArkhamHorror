@@ -519,7 +519,7 @@ allLocationCards =
       , longWayAround
       , lostMemories
       , lounge
-      , lounge
+      , lounge_RtTCU
       , mainPath
       , mapRoom
       , marshRefinery
@@ -9121,6 +9121,292 @@ cloudForest =
       Heart
       [Hourglass, Diamond, Moon, T]
       ReturnToRainforest
+
+witchhauntedWoodsWitchTree :: CardDef
+witchhauntedWoodsWitchTree =
+  victory 1 $ location
+    "54019"
+    "Witchhaunted Woods Witch Tree"
+    [Woods]
+    Squiggle
+    [Squiggle, Plus]
+    ReturnToTheWitchingHour
+
+witchhauntedWoodsUnmarkedGraveyard :: CardDef
+witchhauntedWoodsUnmarkedGraveyard =
+  victory 1 $ location
+    "54020"
+    "Witchhaunted Woods Unmarked Graveyard"
+    [Woods]
+    Squiggle
+    [Squiggle, Plus]
+    ReturnToTheWitchingHour
+
+arkhamWoodsHiddenPath :: CardDef
+arkhamWoodsHiddenPath =
+  locationWithUnrevealed
+    "54021"
+    "Arkham Woods Hidden Path"
+    [Woods]
+    Squiggle
+    [Squiggle, Plus]
+    "Arkham Woods Hidden Path"
+    [Woods]
+    Spade
+    [Squiggle, Trefoil]
+    ReturnToTheWitchingHour
+
+arkhamWoodsPlaceOfPower :: CardDef
+arkhamWoodsPlaceOfPower =
+  locationWithUnrevealed
+    "54022"
+    "Arkham Woods Place Of Power"
+    [Woods]
+    Squiggle
+    [Squiggle, Plus]
+    "Arkham Woods Place Of Power"
+    [Woods]
+    Trefoil
+    [Squiggle, Spade]
+    ReturnToTheWitchingHour
+
+arkhamWoodsBootleggingOperation :: CardDef
+arkhamWoodsBootleggingOperation =
+  locationWithUnrevealed
+    "54023"
+    "Arkham Woods Bootlegging Operation"
+    [Woods]
+    Squiggle
+    [Squiggle, Plus]
+    "Arkham Woods Bootlegging Operation"
+    [Woods]
+    Moon
+    [Squiggle, Equals, Hourglass]
+    ReturnToTheWitchingHour
+
+wineCellar :: CardDef
+wineCellar =
+  location
+    "54027"
+    "Wine Cellar"
+    []
+    Hourglass
+    [T]
+    ReturnToAtDeathSDoorstep
+
+wineCellarSpectral :: CardDef
+wineCellarSpectral =
+  location
+    "54028"
+    "Wine Cellar"
+    [Spectral]
+    Hourglass
+    [T]
+    ReturnToAtDeathSDoorstep
+
+templeOfRlyeh :: CardDef
+templeOfRlyeh =
+  victory 1 $ locationWithUnrevealed
+    "54030"
+    "Temple Of Rlyeh"
+    [Extradimensional, Otherworld]
+    Moon
+    [Square]
+    "Temple Of Rlyeh"
+    [Extradimensional, Otherworld]
+    Equals
+    [Squiggle, Square]
+    ReturnToTheSecretName
+
+thePriceManor :: CardDef
+thePriceManor =
+  location
+    "54031"
+    "The Price Manor"
+    [Extradimensional]
+    Moon
+    [Square]
+    ReturnToTheSecretName
+
+the9thWard :: CardDef
+the9thWard =
+  location
+    "54032"
+    "The9th Ward"
+    [Extradimensional]
+    Moon
+    [Square]
+    ReturnToTheSecretName
+
+libraryOfEbla :: CardDef
+libraryOfEbla =
+  victory 1 $ locationWithUnrevealed
+    "54033"
+    "Library Of Ebla"
+    [Extradimensional]
+    Moon
+    [Square]
+    "Library Of Ebla"
+    [Extradimensional]
+    Squiggle
+    [Square, Equals]
+    ReturnToTheSecretName
+
+hangmansBrookSpectral_RtTCU :: CardDef
+hangmansBrookSpectral_RtTCU =
+  location
+    "54037"
+    "Hangmans Brook Spectral"
+    [Spectral]
+    Squiggle
+    [Circle, Triangle]
+    ReturnToTheWagesOfSin
+
+hangmansBrook_RtTCU :: CardDef
+hangmansBrook_RtTCU =
+  location
+    "54037"
+    "Hangmans Brook"
+    []
+    Squiggle
+    [Circle, Triangle]
+    ReturnToTheWagesOfSin
+
+lounge_RtTCU :: CardDef
+lounge_RtTCU =
+  locationWithUnrevealed
+    "54043"
+    "Lounge"
+    [Lodge]
+    Moon
+    [Circle, Heart, Plus]
+    "Lounge"
+    [Lodge]
+    Moon
+    [Circle, Heart, Plus, Trefoil]
+    ReturnToForTheGreaterGood
+
+relicStorage :: CardDef
+relicStorage =
+  location
+    "54044"
+    "Relic Storage"
+    [Lodge]
+    Trefoil
+    [Moon]
+    ReturnToForTheGreaterGood
+
+shroudedArchive :: CardDef
+shroudedArchive =
+  location
+    "54045"
+    "Shrouded Archive"
+    [Lodge, Sanctum]
+    Star
+    [Squiggle]
+    ReturnToForTheGreaterGood
+
+frenchHill :: CardDef
+frenchHill =
+  location
+    "54050"
+    "French Hill"
+    [Arkham]
+    T
+    [Circle, Square, Star]
+    ReturnToInTheClutchesOfChaos
+
+rivertown_RtTCU :: CardDef
+rivertown_RtTCU =
+  location
+    "54051"
+    "Rivertown"
+    [Arkham]
+    Circle
+    [Square, Triangle, T]
+    ReturnToInTheClutchesOfChaos
+
+southside :: CardDef
+southside =
+  location
+    "54052"
+    "Southside"
+    [Arkham, Central]
+    Square
+    [Circle, Triangle, Plus, T, Diamond]
+    ReturnToInTheClutchesOfChaos
+
+uptown :: CardDef
+uptown =
+  location
+    "54053"
+    "Uptown"
+    [Arkham]
+    Plus
+    [Square, Triangle, Moon]
+    ReturnToInTheClutchesOfChaos
+
+southChurch :: CardDef
+southChurch =
+  location
+    "54054"
+    "South Church"
+    [Arkham]
+    Diamond
+    [Square]
+    ReturnToInTheClutchesOfChaos
+
+merchantDistrict :: CardDef
+merchantDistrict =
+  location
+    "54055"
+    "Merchant District"
+    [Arkham]
+    Triangle
+    [Circle, Square, Plus]
+    ReturnToInTheClutchesOfChaos
+
+nightmareBreach :: CardDef
+nightmareBreach =
+  locationWithUnrevealed
+    "54058"
+    "Nightmare Breach"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    "Nightmare Breach"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    ReturnToBeforeTheBlackThrone
+
+interstellarAbyss :: CardDef
+interstellarAbyss =
+  locationWithUnrevealed
+    "54059"
+    "Interstellar Abyss"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    "Interstellar Abyss"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    ReturnToBeforeTheBlackThrone
+
+windingGulf :: CardDef
+windingGulf =
+  locationWithUnrevealed
+    "54060"
+    "Winding Gulf"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    "Winding Gulf"
+    [Otherworld, Void]
+    NoSymbol
+    [NoSymbol]
+    ReturnToBeforeTheBlackThrone
 
 lobbyTheMidwinterGala :: CardDef
 lobbyTheMidwinterGala =
