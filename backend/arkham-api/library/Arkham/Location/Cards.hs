@@ -99,8 +99,7 @@ allLocationCards =
   mapFromList
     $ map
       (toCardCode &&& id)
-      [ aPocketInTime
-      , abandonedCamp
+      [ abandonedCamp
       , abandonedChapel
       , abandonedChapelSpectral
       , abandonedSite
@@ -119,12 +118,16 @@ allLocationCards =
       , ancientHallRearrangedByTime
       , ancientPlanetarium
       , anotherDimension
+      , aPocketInTime
       , arkhamPoliceStation
+      , arkhamWoodsBootleggingOperation
       , arkhamWoodsCliffside
       , arkhamWoodsCorpseRiddenClearing
       , arkhamWoodsGreatWillow
+      , arkhamWoodsHiddenPath
       , arkhamWoodsLakeside
       , arkhamWoodsOldHouse
+      , arkhamWoodsPlaceOfPower
       , arkhamWoodsQuietGlade
       , arkhamWoodsTangledThicket
       , arkhamWoodsTwistingPaths
@@ -375,6 +378,7 @@ allLocationCards =
       , foyerMurderAtTheExcelsiorHotel
       , frankElwoodsRoom
       , freightCar
+      , frenchHill
       , frenchHill_290
       , frenchHill_291
       , frigidCave
@@ -414,7 +418,9 @@ allLocationCards =
       , hallsOfPnakotusWesternCorridors
       , hallway
       , hangmansBrook
+      , hangmansBrook_RtTCU
       , hangmansBrookSpectral
+      , hangmansBrookSpectral_RtTCU
       , hangmansHillShroudedInMystery
       , hangmansHillWhereItAllEnds
       , hauntedFields
@@ -466,6 +472,7 @@ allLocationCards =
       , innsmouthSquareInTooDeep
       , intersection_a
       , intersection_b
+      , interstellarAbyss
       , interviewRoomArrivalChamber
       , interviewRoomIchorFilledChamber
       , interviewRoomRestrainingChamber
@@ -489,6 +496,7 @@ allLocationCards =
       , leMarais217
       , leMarais218
       , library
+      , libraryOfEbla
       , libraryOfKos
       , libraryTheMidwinterGala
       , lighthouseKeepersCottage
@@ -511,12 +519,14 @@ allLocationCards =
       , longWayAround
       , lostMemories
       , lounge
+      , lounge
       , mainPath
       , mapRoom
       , marshRefinery
       , marshRefineryInTooDeep
       , masterBedroom
       , masterBedroomSpectral
+      , merchantDistrict
       , merchantDistrict_300
       , merchantDistrict_301
       , messHall
@@ -560,6 +570,7 @@ allLocationCards =
       , newChurchGreen
       , newChurchGreenInTooDeep
       , nexusOfNKai
+      , nightmareBreach
       , northside
       , northsideTrainStation
       , northTower_287
@@ -619,6 +630,7 @@ allLocationCards =
       , recessesOfYourOwnMind
       , recordsOffice
       , rehearsalRoom
+      , relicStorage
       , remnantsOfLakesCamp
       , researchSite
       , restaurant
@@ -655,6 +667,7 @@ allLocationCards =
       , riverCanyon
       , riversideTemple
       , rivertown
+      , rivertown_RtTCU
       , rivertown_292
       , rivertown_293
       , rivertownAbandonedWarehouse
@@ -711,6 +724,7 @@ allLocationCards =
       , shorewardSlums
       , shorewardSlumsInTooDeep
       , shrineToHydra
+      , shroudedArchive
       , silverTwilightLodgeShroudedInMystery
       , silverTwilightLodgeWhereItAllEnds
       , siteOfTheSacrifice
@@ -720,8 +734,10 @@ allLocationCards =
       , snakePit
       , snowCoveredCrag
       , snowGraves
+      , southChurch
       , southChurch_298
       , southChurch_299
+      , southside
       , southside_294
       , southside_295
       , southsideHistoricalSociety
@@ -755,6 +771,7 @@ allLocationCards =
       , syzygyChamber
       , tearThroughSpace
       , tearThroughTime
+      , templeOfRlyeh
       , templeOfTheElderThings
       , templeOfTheFang
       , templeOfTheMoonLizard
@@ -768,6 +785,7 @@ allLocationCards =
       , temploMayor_175
       , tenAcreMeadow_246
       , tenAcreMeadow_247
+      , the9thWard
       , theatre
       , theatreLounge
       , theBlackCore
@@ -799,6 +817,7 @@ allLocationCards =
       , theLittleBookshopInTooDeep
       , theMoonRoom
       , theOnyxCastle
+      , thePriceManor
       , theSummit
       , theThroneRoom
       , theWhiteShip
@@ -848,6 +867,7 @@ allLocationCards =
       , upstairsDoorwayBedroom
       , upstairsDoorwayLibrary
       , upstairsHallway
+      , uptown
       , uptown_296
       , uptown_297
       , valeOfPnath
@@ -873,7 +893,10 @@ allLocationCards =
       , whateleyRuins_250
       , whateleyRuins_251
       , whiteBluff
+      , windingGulf
       , windsweptPath
+      , wineCellar
+      , wineCellarSpectral
       , witchesCircle
       , witchHauntedWoodsAbandonedMine
       , witchHauntedWoodsCairnStones
@@ -882,6 +905,8 @@ allLocationCards =
       , witchHauntedWoodsOvergrownBarn
       , witchHauntedWoodsTaintedWell
       , witchHauntedWoodsTheLonelyTree
+      , witchhauntedWoodsUnmarkedGraveyard
+      , witchhauntedWoodsWitchTree
       , witchHouseRuins
       , xochimilco
       , yard
